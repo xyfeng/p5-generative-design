@@ -1,0 +1,22 @@
+{
+  "name": "p5GD",
+  "version": "0.0.0",
+  "private": "true",
+  "description": "",
+  "scripts": {
+    "start": "gulp sync"
+  },
+  "author": "XY Feng <fxy0111@gmail.com>",
+  "dependencies": {
+    "gulp": "^3.8.11"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.13",
+    "del": "^1.2.0",
+    "fs": "0.0.2",
+    "gulp-data": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.6",
+    "path": "^0.11.14"
+  }
+}
