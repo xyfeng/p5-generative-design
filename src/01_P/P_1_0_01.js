@@ -27,7 +27,6 @@ function draw() {
 
 function keyPressed() {
   if (key == 's' || key == 'S') {
-    var now = new Date();
-    save(now.toLocaleTimeString() + "_" + frameCount + ".png");
+    save(frameCount + ".png");
   }
 }

@@ -10,20 +10,17 @@
  * s                   : save png
  */
 
- /* bug */
-
 var segmentCount = 360;
 var radius = 300;
 
 function setup() {
   createCanvas(800, 800);
+  background(255);
+  noStroke();
+  colorMode(HSB, 360, 100, 100);
 }
 
 function draw() {
-  noStroke();
-  colorMode(HSB, 360, width, height);
-  background(360);
-
   var angleStep = 360.0 / segmentCount;
 
   beginShape(TRIANGLE_FAN);
@@ -31,7 +28,7 @@ function draw() {
   for (var angle = 0; angle <= 360; angle += angleStep) {
     var vx = width / 2 + cos(radians(angle)) * radius;
     var vy = height / 2 + sin(radians(angle)) * radius;
-    fill(angle, mouseX, mouseY);
+    fill(angle, 100, 100);
     vertex(vx, vy);
   }
   endShape();
@@ -39,8 +36,7 @@ function draw() {
 
 function keyPressed() {
   if (key == 's' || key == 'S') {
-    var now = new Date();
-    save(now.toLocaleTimeString() + "_##.png");
+    save(frameCount + ".png");
   }
 
   switch (key) {
