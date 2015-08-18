@@ -37,26 +37,29 @@ gulp.task('clean', function() {
 gulp.task('generate', ['clean'], function() {
     return gulp.src(['src/**/*.js', '!src/libraries/**/*.*'])
     .pipe(data(function(file){
+        var dirname = path.relative(file.cwd, file.path).replace('src/','').replace('/sketch.js', '');
+        var folderName = dirname.split('/').slice(-1)[0];
         var content = String(file.contents);
         content = copyright + content;
-        content = '// ' + path.basename(file.path, '.js') + '\n' + content;
+        content = '// ' + path.basename(folderName, '.js') + '\n' + content;
         file.contents = new Buffer(content);
-    }))
-    .pipe(rename(function(filepath) {
-        filepath.dirname += "/" + filepath.basename;
-        filepath.basename = "sketch";
 
         // copy index
         gulp.src(['src/index.html'])
             .pipe(data(function(file){
                 var content = String(file.contents);
-                content = content.replace('Untitled', filepath.dirname.split('/')[1]);
+                content = content.replace('Untitled', folderName);
                 file.contents = new Buffer(content);
             }))
-            .pipe(gulp.dest('dist/' + filepath.dirname))
+            .pipe(gulp.dest('dist/' + dirname));
+
         // copy libraries
         gulp.src(['src/libraries/**/*.*'])
-            .pipe(gulp.dest('dist/' + filepath.dirname + '/libraries'))
+            .pipe(gulp.dest('dist/' + dirname + '/libraries'));
+
+        // copy data
+        gulp.src(['src/' + dirname + '/data/**/*.*'])
+            .pipe(gulp.dest('dist/' + dirname + '/data'));
     }))
     .pipe(gulp.dest('dist/'));
 });

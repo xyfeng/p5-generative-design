@@ -12,8 +12,6 @@
  * c                   : save color palette
  */
 
-/* bug */
-
 var tileCountX = 2;
 var tileCountY = 10;
 
